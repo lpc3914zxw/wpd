@@ -1,0 +1,112 @@
+html, body {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	color: #333;
+	font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+	font-size: normal 14px;
+	color: #333;
+}
+
+/* top */
+.top {
+	width: 100%;
+	height: 56px;
+	background: #3f3f3f;
+}
+.top .topcont {
+	width: 1180px;
+	margin: 0 auto;
+}
+.top .logo {
+	float: left;
+	margin-right: 30px;
+	font-size: 26px;
+}
+.top .logo img {
+	border: 0
+}
+.top .nav {
+	float: left;
+}
+.top .nav li {
+	list-style: none;
+	float: left;
+	color: #b3b3b3;
+	font-size: 16px;
+	line-height: 56px;
+	text-align: center;
+}
+.top .nav li a {
+	display: block;
+	width: 118px;
+	height: 56px;
+}
+.top .nav li a, .nav li a:link, .nav li a:visited {
+	text-decoration: none;
+	color: #b3b3b3;
+}
+.top .nav li a:hover, .nav li .active {
+	color: #fff;
+	background: #262626;
+	border-bottom: 3px solid #db2507;
+	height: 56px;
+}
+.top .topcont .userInfo {
+	float: right;
+	color: #CCC;
+	margin-top: 15px;
+}
+.top .topcont .userInfo span {
+	color: #db2507;
+	font-size: 14px;
+}
+.top .topcont .userInfo a {
+	color: #CCC;
+	margin-left: 20px;
+}
+
+/* top */
+
+/*轮播窗体*/
+.bd, li {
+	width: 100%;
+	height: 100%;
+}
+.tempWrap {
+	height: 100%;
+	width: 100%;
+	text-align: center;
+}
+.picScroll-left {
+	background-color: #3f3f3f
+}
+.picScroll-left .picList img {
+	width: 100%;
+	height: 100%;
+}
+
+/*二维码框*/
+.loginBox1 {
+	left: 5%;
+}
+.loginBox2 {
+	left: 50%;
+}
+.loginBox3 {
+	left: 87%;
+}
+.loginBox1, .loginBox2, .loginBox3 {
+	width: 430px;
+	height: 430px;
+	position: absolute;
+	z-index: 1;
+	bottom: 20%;
+	color: #fff;
+	overflow: hidden;
+	text-align: center;
+	background: url('/wsp/assets/images/ewmbg.png') repeat 430px 430px;
+}
+.impowerBox .title {
+	display: none;
+}

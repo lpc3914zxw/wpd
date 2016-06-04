@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>{if empty($serviceInfo['pageTitle'])}频道管理{else}{$serviceInfo['pageTitle']}{/if}</title>
+<link rel="stylesheet" type="text/css" href="{WPD_ASSETS_PATH}css/style.css">
+<link rel="stylesheet" type="text/css" href="{WPD_ASSETS_PATH}css/partyList.css">
+</head>
+<body>
+{include file="header.html"}
+<div class="content">
+  <div class="c_1">
+    <div class="c_1_c">
+      <h1>活动列表</h1>
+    </div>
+  </div> 
+  <div class="c_2">
+   <span class="sp1">活动主题 </span>
+    <span class="sp2">活动时间</span> 
+    <span class="sp3">封面图</span> 
+    <span class="sp4">状态</span>
+     <span class="sp5">操作</span> 
+     </div>
+  <div class="c_3">
+    <ul>
+    {foreach $partiesList $val}
+    <li>
+        <p class="sp1">{$val["title"]}</p>
+        <p class="sp2"> {$val["startTime"]} 至 {$val["etartTime"]} </p>
+        <p class="sp3"><img src="{$val["surfaceUrl"]}" /></p>
+        {if $val['state'] == 1}
+       	 	<p class="sp4">进行中…</p>
+        {else}
+        	<p class="sp4">已结束</p>
+        {/if}
+        <p class="sp5">
+	        <a class="abj" href="index.php?r=party/editParty&channelId={$channelId}&partyId={$val['partyId']}"><span class="bj">编辑</span></a> 
+	        <span class="afx fx" url="{$val['partyUrl']}" title="{php echo urlencode($val['title'])}" desc="{php echo urlencode($val['title'])}" img="{$val['surfaceUrl']}" style="cursor: pointer;">分享</span>
+	        <span class="sc" onClick="deleteParty({$val['partyId']});" style="cursor: pointer;">删除</span>
+        </p>
+      </li>
+     {/foreach}
+     <li>
+     <div class="party-pagination-container">
+		<a href="{$preUrl}" onClick="prevPage();return false;">«</a>
+		<a href="#" id="page" onClick="return false;">$page</a>
+		<a href="{$nextUrl}" onClick="nextPage();return false;">»</a>
+	</div>
+	</li>
+    </ul>
+  </div>
+</div>
+
+<script type="text/javascript" src="http://cdn.aodianyun.com/static/jquery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{WPD_ASSETS_PATH}js/dlg.js"></script>
+<script type="text/javascript">
+var page = {$page};
+var endPage = false;
+var channelId = "{$channelId}";
+$(function(){
+	$('.afx').live('click',function(){
+		var url = $(this).attr('url');
+		var title = $(this).attr('title');
+		var desc = $(this).attr('desc');
+		var img = $(this).attr('img');
+		var html = '<iframe scrolling="no" frameborder="0" width="600px" height="230px" src="index.php?r=console/share&channelId='+channelId+'&type=party&url='+url+'&title='+title+'&desc='+desc+'&img='+img+'"></iframe>';
+		dlg(670,390,'活动分享',html,function(){
+			dlgClose();
+		});
+	});
+});
+function prevPage(){
+	if(page == 1){
+		return;
+	}
+	page--;
+	goPage(page);
+}
+function nextPage(){
+	if(endPage){
+		return;
+	}
+	page++;
+	goPage(page);
+}
+function goPage(page){
+	window.location.href = 'index.php?r=party/index&channelId='+channelId+'&page='+page
+}
+function deleteParty(partyId){
+	var html = '\
+		<p class="dlg-label">您确定要删除该活动吗？</p>\
+	';
+	dlg(350,200,'删除活动',html,function(){
+		dlgWait();
+		$.ajax({
+			type:'POST',
+			url:'index.php?r=party/delete&channelId='+channelId,
+			data:{partyId:partyId},
+			dataType:'JSON',
+			async:false,
+			success:function(data) {
+				dlgWaitClose();
+				if(data.Flag == 100){
+					dlgClose();
+					dlgMsg(1,'提示','活动删除成功');
+  					setTimeout(function(){window.location.reload();},1300);
+					return;
+				}
+				else{
+					dlgMsg(3,'提示',data.FlagString);
+				}
+			}
+		});
+	});
+}
+</script>
+{include file="footer.html"}
+</body>
+</html>
