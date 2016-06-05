@@ -78,10 +78,24 @@ class LayoutController extends CController{
 		$this->assign('channelInfo',$channelInfo);
 		$this->assign('activePartiesInfo',$activePartiesInfo);
 		$this->assign('partyList',$partyList);
+		$partyId = $activePartiesInfo['partyId'];
+		$this->assign('partyId',$partyId);
+		$redirect = urlencode(SYSTEM_HOST.'/openlogin/wspLogin.php').'?partyId='.$partyId;
+		$this->assign('redirect',$redirect);
 		
 		$this->end(array('runtime'=>false,'tplfile'=>'layout/livestream/index.html'));
 		
 	}
+	
+	public function actionWinAuth()
+	{
+		if(empty($_GET['id'])){
+			$this->showMsg('参数错误',-1);
+		}
+		$id = intval($_GET['id']);
+		
+	}
+	
 	
 	public function actionParty(){
 		if(empty($_GET['id'])){

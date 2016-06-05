@@ -1,12 +1,17 @@
-<html>
+﻿<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- <meta http-equiv="Content-Type" content="text/html; charset=gb2312"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" type="text/css" href="{WSP_ASSETS_PATH}css/slider.css" />
     <link rel="stylesheet" type="text/css" href="{WSP_ASSETS_PATH}css/livestreamlayout.css"/>
+	<link rel="stylesheet" type="text/css" href="{WSP_ASSETS_PATH}frozenui/css/frozen.css?v=3"/>
+	<script src="{WSP_ASSETS_PATH}frozenui/lib/zepto.min.js"></script>
+    <script src="{WSP_ASSETS_PATH}frozenui/js/frozen.js"></script>
+
 <title>{$partyInfo['title']}</title>
 </head>
 <body>
@@ -75,6 +80,94 @@ html,body{
 	margin:0;
 	z-index:1
 }
+
+
+
+/*******/
+.countdownHolder {
+	opacity:1.0;
+    position: fixed;
+    z-index: 98;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    letter-spacing: -3px;
+    background-color: rgba(0,0,0,.8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000);
+	top:0px;
+	left:0px;
+}
+.countTitle {
+    display: inline-block;
+    padding: 0 16px;
+    margin-top: 28px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #29aae1;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 5px;
+    letter-spacing: 1px;
+}
+.countWrap {
+    margin-top: 17px;
+}
+.countBox {
+    display: inline-block;
+    padding: 0px 5px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #1a1a1a;
+}
+.position {
+    display: inline-block;
+    height: 60px;
+    overflow: hidden;
+    position: relative;
+    width: 30.5px;
+    font: 31px/1.5 Open Sans Condensed,sans-serif;
+}
+.digit.static {
+    box-shadow: 1px 1px 1px rgba(4,4,4,.35);
+    background-image: linear-gradient(bottom,#3a3a3a 50%,#444 0);
+    background-image: -webkit-linear-gradient(bottom,#3a3a3a 50%,#444 0);
+    background-image: -ms-linear-gradient(bottom,#3a3a3a 50%,#444 50%);
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(.5,#3a3a3a),color-stop(.5,#444));
+}
+.digit {
+    position: absolute;
+    display: block;
+    left: 0;
+    width: 30px;
+    background-color: #444;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    letter-spacing: -1px;
+}
+.countDiv {
+    display: inline-block;
+    width: 14px;
+    height: 80px;
+    position: relative;
+    font: 50px/1.5 Open Sans Condensed,sans-serif;
+}
+.countDiv:after, .countDiv:before {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: #444;
+    border-radius: 50%;
+    left: 50%;
+    margin-left: -3px;
+    top: .6em;
+    box-shadow: 1px 1px 1px rgba(4,4,4,.5);
+    content: '';
+}
+.countDiv:after {
+    top: .9em;
+}
+
 </style>
 {if $partyInfo['living'] == 1}
 <div class="surface-container" id="lssPlayBox" onClick="play();">
@@ -84,6 +177,7 @@ html,body{
         <source src="{$videoUrl}" type='application/x-mpegURL'/>
     </video>
 </div>
+
 {else}
     {if !empty($partyInfo['vodList'])}
 	<div class="surface-container" id="lssPlayBox" onClick="play();">
@@ -99,6 +193,7 @@ html,body{
     </div>
     {/if}
 {/if}
+<div id="countdown-box"></div>
 {if !empty($partyInfo['vodList'])}
 <div id="slider"></div>
 {/if}
@@ -132,8 +227,31 @@ html,body{
     </div>
     <div class="clear"></div>
 </div>
-
-<div id="dms"><img src="{WSP_ASSETS_PATH}images/loading.gif?v=1" class="loading"></div>
+<div class="ui-tab"> 
+			    <ul class="ui-tab-nav ui-border-b">
+			        <li class="current">互动聊天</li>
+			        <li>大会嘉宾</li>
+			        <li>大会议程</li>
+			    </ul>
+			    <ul class="ui-tab-content" style="width:300%">
+			        <li><div id="dms"><img src="{WSP_ASSETS_PATH}images/loading.gif?v=1" class="loading"></div></li>
+			        <li>内容2</li>
+			        <li>内容3</li>
+			    </ul>
+			</div>
+<script class="demo-script">
+		(function (){
+            var tab = new fz.Scroll('.ui-tab', {
+		        role: 'tab',
+		        autoplay: false,
+		        interval: 3000
+		    });
+		    /* 滑动开始前 */
+		    tab.on('beforeScrollStart', function(fromIndex, toIndex) {
+		        console.log(fromIndex,toIndex);// from 为当前页，to 为下一�?
+		    })
+		})();
+ </script>
 {if !empty($partyInfo['vodList'])}
 <script type="text/javascript" src="{WSP_ASSETS_PATH}js/zepto.js"></script>
 <script type="text/javascript" src="{WSP_ASSETS_PATH}js/touch.js"></script>
@@ -154,6 +272,8 @@ var slider = $.ui.slider('#slider', {
 </script>
 {/if}
 <script type="text/javascript" src="http://cdn.aodianyun.com/static/jquery/jquery-1.7.2.min.js"></script>
+<script src="{WSP_ASSETS_PATH}/js/countdown.js" type="text/javascript" charset="GB2312"></script>
+<script src="{WSP_ASSETS_PATH}/js/loadtime.js?v=5" type="text/javascript" charset="GB2312"></script>
 <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
 var video = document.getElementById('lss');
@@ -246,13 +366,13 @@ function shareTimeline(){
 }
 
 $(window).load(function(){
-	$('#dms').height(document.body.clientHeight-$('#lssPlayBox').height()-$('#slider').height()-$('#channelInfo').height());
+	$('#dms').height(document.body.clientHeight-$('#lssPlayBox').height()-$('#slider').height()-$('#channelInfo').height()-45);
 	$('.loading').show();
 	(function() {
 	  var dms = document.createElement('script');
 	  dms.type = 'text/javascript';
 	  dms.async = true;
-      dms.src = DMS_SITE + '/dms/wsp.js';
+      dms.src = DMS_SITE + '/dms/wsp.js?v=27';
 	  dms.charset = 'UTF-8';
 	  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dms);
 	})();
@@ -280,7 +400,7 @@ function showVideo(key,url){
 }
 function addPraises(){
 	if(typeof(dmsCommonHandle) == 'undefined'){
-		alert('组件正在加载中，请稍后...');
+		alert('组件正在加载中，请稍�?..');
 		return;
 	}
 	if(DMS_OPENID == 0){
