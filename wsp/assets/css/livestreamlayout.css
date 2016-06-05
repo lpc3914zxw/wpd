@@ -1,0 +1,167 @@
+html,body{
+	width:100%;
+	margin:0;
+	padding:0;
+	font-family:"Microsoft YaHei","微软雅黑",Arial,sans-serif;
+	font-size:normal 100%;
+	color: #666;
+	background:#ebebeb;
+}
+img{
+	max-width:100%;
+	border:0;
+}
+a,a:hover,a:visited,a:active,a:link{
+	text-decoration:none;
+	border:none;
+}
+.clear{
+	clear:both;
+}
+.surface-container{
+	width:100%;
+	height:13em;
+	background:#000;
+	overflow:hidden;
+	margin:0;
+	padding:0;
+	position:relative;
+}
+.surface-container img{
+	width:100%;
+	height:13em;
+	z-index:2;
+}
+.surface-container .play-btn{
+	width:72px;
+	height:54px;
+	background:url(../images/play-btn.png);
+	background-size:cover;
+	position:absolute;
+	left:50%;
+	margin-left:-36px;
+	top:50%;
+	margin-top:-27px;
+	z-index:3;
+}
+.channel-info{
+	width:100%;
+	height:2.5rem;
+	background:#fff;
+	position:relative;
+	margin:0;
+	border-bottom:1px solid #ccc;
+	font-size:0.75rem;
+	color:#999;
+	margin-bottom:0.625rem;
+}
+.channel-info .living{
+	background:#cf202e;
+	color:#ffffff;
+	border-radius:0.1875em;
+	width:2.1rem;
+	height:1.4rem;
+	text-align:center;
+	line-height:1.4rem;
+	margin-left:0.6rem;
+	margin-top:0.55rem;
+	float:left;
+}
+.channel-info .unliving{
+	background:#666666;
+	color:#ffffff;
+	border-radius:0.1875em;
+	width:2.1rem;
+	height:1.4rem;
+	text-align:center;
+	line-height:1.4rem;
+	margin-left:0.6rem;
+	margin-top:0.55rem;
+	float:left;
+}
+.channel-info .channel-desc{
+	float:right;
+	width:auto;
+	margin-top:0.6rem;
+	margin-right:1rem;
+}
+.channel-info .channel-desc img{
+	width:1.5rem;
+	float:left;
+	margin-left:0.5rem;
+}
+.channel-info .channel-desc img:first-child{
+	margin-left:0;
+}
+.channel-info .channel-desc span{
+	float:left;
+	margin-top:0.3rem;
+}
+.party-info{
+	width:100%;
+    height:auto;
+	margin-bottom:0.625rem;
+	padding-bottom:0.5rem;
+	position:relative;
+	background:#fff;
+	border-bottom:1px solid #ccc;
+}
+.party-info .party-img{
+	display:inline-block;
+    overflow:hidden;
+	width:100%;
+	height:13em;
+	position:relative;
+	z-index:2;
+}
+.party-info .live-btn{
+	width:51px;
+	height:51px;
+	position:absolute;
+	left:50%;
+	margin-left:-25.5px;
+	top:50%;
+	margin-top:-25.5px;
+	z-index:3;
+}
+.party-info .party-img .surface{
+	width:100%;
+	height:13em;
+	z-index:2;
+}
+.party-info .party-desc{
+	width:100%;
+    margin-top:0.5rem;
+    position:relative;
+}
+.party-info .party-desc .party-title{
+	float:left;
+    margin-left:0.5rem;
+    font-size:1rem;
+	font-weight:bold;
+    color:#333;
+    width:10rem;
+    display:block;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.party-info .party-desc .talk-num{
+	float:right;
+	margin-right:1rem;
+	font-size:0.75rem;
+	margin-top:0.3rem;
+	color:#999;
+}
+.party-info .party-desc .talks{
+	width:1.5rem;
+	float:right;
+    margin-right:0.1rem;
+	display:block;
+}
+.party-info .party-time{
+	margin-top:0.2rem;
+    font-size:0.75rem;
+    margin-left:0.5rem;
+    color:#707070;
+}

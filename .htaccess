@@ -1,0 +1,8 @@
+#nginx请启用以下重写
+#rewrite ^(.*)/layout/livestream/([0-9]+)$ $1/wsp/index.php?r=layout/livestream&id=$2 last;
+#rewrite ^(.*)/layout/party/([0-9]+)$ $1/wsp/index.php?r=layout/party&id=$2 last;
+
+#apache请启用以下重写
+#RewriteEngine on
+#RewriteRule ^layout/livestream/([0-9]+)$ wsp/index.php?r=layout/livestream&id=$1 [L,QSA]
+#RewriteRule ^layout/party/([0-9]+)$ wsp/index.php?r=layout/party&id=$1 [L,QSA]

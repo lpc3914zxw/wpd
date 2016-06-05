@@ -1,0 +1,43 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="/console/index.php?r=home/index">奥点云控制台</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">产品与服务 <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="/console/index.php?r=service/list&type=cloudMedia"><img src="/console/assets/img/product3.png" /> 流媒体直播服务LSS</a></li>
+              <!--<li><a href="/console/index.php?r=service/list&type=cloudProxy"><img src="/console/assets/img/product2.png" /> 智能通讯服务ICS</a></li>
+              <li><a href="/console/index.php?r=service/list&type=cloudFront"><img src="/console/assets/img/product4.png" /> 奥点云前端</a></li>-->
+              <li><a href="/console/index.php?r=dms/appList"><img src="/console/assets/img/product5.png" /> 分布式双向消息服务DMS</a></li>
+              <li><a href="/console/index.php?r=dvr/list"><img src="/console/assets/img/product6.png" /> 视频存储服务DVR</a></li>
+              <li><a href="/console/index.php?r=vod/list"><img src="/console/assets/img/product7.png" /> 视频点播服务VOD</a></li>
+              <li><a href="/console/index.php?r=lcps/appList"><img src="/console/assets/img/product8.png" /> 云导播台LCPS</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav pull-right">
+          <li class="dropdown">
+            <a href="/" target="_blank">官网首页</a>
+          </li>
+        </ul>
+        <ul class="nav pull-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$userInfo['email']} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="/service/index.php?r=account/index" target="_blank"> 用户中心</a></li>
+              <li><a href="/service/index.php?r=finance/index" target="_blank"> 账户管理</a></li>
+              <li><a href="/service/index.php?r=account/loginOut"> 退出</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
