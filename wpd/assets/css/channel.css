@@ -1,0 +1,15 @@
+﻿@charset "utf-8";
+/*================userlist=================*/
+.fgx{ width:1132px; margin:0 auto; border-bottom:1px solid #F2F2F2}
+.channel_con { width:1173px; margin:50px auto;border:1px solid #E4E4E4; background:#fff }
+.channel_con_tt{ height:60px}
+.channel_con_tt h1 { width: 224px; margin: 25px 0 0 60px; float:left; color: #1b1b1b; font-family: "微软雅黑 Bold", "微软雅黑"; font-size: 19px; font-weight: 700; }
+
+.channel_con .channel_con_form{ width:880px; margin:20px auto}
+.channel_con .channel_con_form .inputdiv{ margin:10px 0; }
+.channel_con .channel_con_form .inputdiv span{ height:26px; line-height:26px; float:left; font-size:14px;}
+.channel_con .channel_con_form .inputdiv .img{ margin-top:10px}
+.channel_con .channel_con_form input{ width:252px; height:26px}
+
+.channel_con .channel_con_form .spdb input{ width: 66px; height: 30px; color: #fff; border-radius: 5px; border-color: #DB2507; background: #DB2507; cursor: pointer;}
+	

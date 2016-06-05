@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title>创建活动</title>
+    <link rel="stylesheet" type="text/css" href="{WPD_ASSETS_PATH}css/dlg.css">
+</head>
+<style>
+html,body{
+	width:100%;
+	height:200px;
+	background:#ffffff;
+	margin:0;
+	padding:0;
+}
+</style>
+<body>
+<form method="post" enctype="multipart/form-data" id="createPartyForm" action="index.php?r=party/create&channelId={$channelInfo['id']}">
+  <p class="dlg-label">活动主题:</p>
+  <p class="dlg-form-lable">
+    <input type="text" id="title" name="title" style="width:80%;" placeholder="不超过20个字" maxlength="20">
+  </p>
+  <p class="dlg-label">活动时间:</p>
+  <p class="dlg-form-lable">
+    <input type="text" id="sTime" name="sTime" style="width:230px;" onfocus="WdatePicker({sdate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,maxDate:'#F{{php echo '$';}dp.{php echo '$';}D(\'eTime\')}'})">
+    &nbsp;至&nbsp;
+    <input type="text" id="eTime" name="eTime" style="width:230px;" onfocus="WdatePicker({sdate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,minDate:'#F{{php echo '$';}dp.{php echo '$';}D(\'sTime\')}'})">
+  </p>
+  <p class="dlg-label">封面设置:（请上传2MB以内的jpg,png,gif格式的图片）</p>
+  <p class="dlg-form-lable">
+    <input type="file" id="pic" name="pic" style="border: none;">
+  </p>
+</form>
+<script type="text/javascript" src="{SYSTEM_HOST}/static/My97DatePicker/WdatePicker.js"></script>
+</body>
+</html>

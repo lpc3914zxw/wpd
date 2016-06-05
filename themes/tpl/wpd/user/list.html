@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<title>{if empty($serviceInfo['pageTitle'])}频道管理{else}{$serviceInfo['pageTitle']}{/if}</title>
+<link rel="stylesheet" type="text/css" href="{WPD_ASSETS_PATH}css/style.css">
+<link rel="stylesheet" type="text/css" href="{WPD_ASSETS_PATH}css/userlist.css">
+</head>
+
+<body>
+{include file="header.html"}
+<!--内容部分-->
+<div class="user_con">
+	<div class="user_con_tt">
+		<h1>用户管理</h1>
+	</div>  
+	<div class="fgx"></div>
+	<div class="TabCon">
+		<div class="tabList">
+			<ul>
+				<li{if $type == ''} class="hit"{/if}><a href="index.php?r=user/index&channelId={$channelId}">全部用户</a></li>
+				<li{if $type == 'gap'} class="hit"{/if}><a href="index.php?r=user/index&channelId={$channelId}&type=gap">禁言用户</a></li>
+				<li{if $type == 'black'} class="hit"{/if}><a href="index.php?r=user/index&channelId={$channelId}&type=black">黑名单用户</a></li>
+			</ul>
+		</div>
+		<div style="clear:both"></div>
+		<div class="listcon">
+			<div class="listbt">
+				<ul>
+					<li>用户</li><li>访问次数</li><li>评论数</li><li>最后登录时间</li><li>操作</li>
+				</ul>
+        	</div>
+			<div class="tlists">
+				<div class="tlist" style="display:block;">
+					<ul class="listnr">
+					{foreach $userList $val}
+						<li>
+							<p><img class="img" src="{$val['url']}" /><font>{$val['nick']}</font></p>
+							<p>{$val['pvNum']}</p>
+							<p>{$val['chatNum']}</p>
+							<p>{$val['time']}</p>
+							<p>
+							{if $val['gap'] == 0}
+								<span class="jcjy" onclick="addGaps('{$val['uid']}','{$val['nick']}')">禁言</span>
+							{else}
+								<span class="jcjy" onclick="deleteGaps('{$val['uid']}','{$val['nick']}')">解除禁言</span>
+							{/if}
+							{if $val['black'] == 0}
+								<span class="jcjy" onclick="addBlacklists('{$val['uid']}','{$val['nick']}')">踢人</span>
+							{else}
+								<span class="jcjy" onclick="deleteBlacklists('{$val['uid']}','{$val['nick']}')">拉回</span>
+							{/if}
+							</p>
+						</li>
+					{/foreach}
+					</ul>
+					<div class="tlist_db">
+						<div class="tlist_db_p2">
+							<ul class="pagelist">
+								<li><a href="{$indexUrl}">首页</a></li>
+							{if $preUrl != ""}
+								<li><a href="{$preUrl}">上一页</a></li>
+							{/if}
+								<li class="thisclass">$page</li>
+							{if $nextUrl != ""}
+								<li><a href="{$nextUrl}">下一页</a></li>
+							{/if}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--内容部分end-->
+{include file="footer.html"}
+<script type="text/javascript" src="http://cdn.aodianyun.com/static/jquery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{WPD_ASSETS_PATH}js/dlg.js"></script>
+<script type="text/javascript">
+	var channelId = '{$channelId}';
+	function addBlacklists(uin,nick){
+		dlgWait();
+		$.ajax({
+			type:'POST',
+			data:{uin:uin,nick:nick},
+			url:'index.php?r=console/addBlacklists&channelId='+channelId,
+			dataType:'JSON',
+			success:function(data) {
+				dlgWaitClose();
+				if(data.Flag == 100){
+					//刷新页面
+					dlgMsg(1,'提示','操作成功');
+					setTimeout(function(){window.location.reload();},1300);
+				}
+				else{
+					dlgMsg(3,'提示','操作失败');
+				}
+			}
+		});
+	}
+	
+	var deleteBlacklists = function(uin,nick){
+		dlgWait();
+		$.ajax({
+			type:'POST',
+			data:{uin:uin,nick:nick},
+			url:'index.php?r=console/deleteBlacklists&channelId='+channelId,
+			dataType:'JSON',
+			success:function(data) {
+				dlgWaitClose();
+				if(data.Flag == 100){
+					//刷新页面
+					dlgMsg(1,'提示','操作成功');
+					setTimeout(function(){window.location.reload();},1300);
+				}
+				else{
+					dlgMsg(3,'提示','操作失败');
+				}
+			}
+		});
+	}
+	
+	var addGaps = function(uin,nick){
+		dlgWait();
+		$.ajax({
+			type:'POST',
+			data:{uin:uin,nick:nick},
+			url:'index.php?r=console/addGaps&channelId='+channelId,
+			dataType:'JSON',
+			success:function(data) {
+				dlgWaitClose();
+				if(data.Flag == 100){
+					//刷新页面
+					dlgMsg(1,'提示','操作成功');
+					setTimeout(function(){window.location.reload();},1300);
+				}
+				else{
+					dlgMsg(3,'提示','操作失败');
+				}
+			}
+		});
+	}
+	
+	var deleteGaps = function(uin,nick){
+		dlgWait();
+		$.ajax({
+			type:'POST',
+			data:{uin:uin,nick:nick},
+			url:'index.php?r=console/deleteGaps&channelId='+channelId,
+			dataType:'JSON',
+			success:function(data) {
+				dlgWaitClose();
+				if(data.Flag == 100){
+					//刷新页面
+					dlgMsg(1,'提示','操作成功');
+					setTimeout(function(){window.location.reload();},1300);
+				}
+				else{
+					dlgMsg(3,'提示','操作失败');
+				}
+			}
+		});
+	}
+
+	var addManager = function(uin,nick){
+		dlgWait();
+		$.ajax({
+			type:'POST',
+			data:{uin:uin,nick:nick},
+			url:'index.php?r=console/addManager&channelId='+channelId,
+			dataType:'JSON',
+			success:function(data) {
+				dlgWaitClose();
+				if(data.Flag == 100){
+					//刷新页面
+					dlgMsg(1,'提示','操作成功');
+					setTimeout(function(){window.location.reload();},1300);
+				}
+				else{
+					dlgMsg(3,'提示','操作失败');
+				}
+			}
+		});
+	}
+	
+	var deleteManager = function(uin,nick){
+		dlgWait();
+		$.ajax({
+			type:'POST',
+			data:{uin:uin,nick:nick},
+			url:'index.php?r=console/deleteManager&channelId='+channelId,
+			dataType:'JSON',
+			success:function(data) {
+				dlgWaitClose();
+				if(data.Flag == 100){
+					//刷新页面
+					dlgMsg(1,'提示','操作成功');
+					setTimeout(function(){window.location.reload();},1300);
+				}
+				else{
+					dlgMsg(3,'提示','操作失败');
+				}
+			}
+		});
+	}
+</script> 
+</body>
+</html>

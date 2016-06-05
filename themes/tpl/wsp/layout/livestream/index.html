@@ -1,0 +1,59 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="{WSP_ASSETS_PATH}css/livestreamlayout.css"/>
+<title>{$channelInfo['title']}</title>
+</head>
+<body>
+{if WSP_REWRITE === true}
+<a href="{SYSTEM_HOST}/layout/party/{$activePartiesInfo['partyId']}">
+{else}
+<a href="{SYSTEM_HOST}/wsp/index.php?r=layout/party&id={$activePartiesInfo['partyId']}">
+{/if}
+    <div class="surface-container">
+        <div class="play-btn"></div>
+        {if $activePartiesInfo['carousel']}
+        <img src="{$activePartiesInfo['carousel']}" />
+        {/if}
+    </div>
+</a>
+<div class="channel-info">
+	<div {if $activePartiesInfo['living'] == 1}class="living"{else}class="unliving"{/if}>LIVE</div>
+    <div class="channel-desc">
+    	<img src="{WSP_ASSETS_PATH}images/icon02.png" />
+        <span>{$activePartiesInfo['pvNum']}</span>
+    	<img src="{WSP_ASSETS_PATH}images/icon03.png" />
+        <span>{$activePartiesInfo['praiseNum']}</span>
+    	<img src="{WSP_ASSETS_PATH}images/icon04.png" />
+        <span>{$activePartiesInfo['msgNum']}</span>
+    	<img src="{WSP_ASSETS_PATH}images/icon05.png" />
+        <span>{$activePartiesInfo['shareNum']}</span>
+    	<div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+{foreach $partyList $val}
+<div class="party-info">
+{if WSP_REWRITE === true}
+    <a class="party-img" href="{SYSTEM_HOST}/layout/party/{$val['partyId']}">
+{else}
+    <a class="party-img" href="{SYSTEM_HOST}/wsp/index.php?r=layout/party&id={$val['partyId']}">
+{/if}
+    	<img class="surface" src="{$val['carousel']}" />
+    	<img class="live-btn" src="{WSP_ASSETS_PATH}images/liveBtn.png">
+    </a>
+    <div class="party-desc">
+        <div class="party-title">{$val['title']}</div>
+        <div class="talk-num">{$val['msg_num']}</div>
+       	<img class="talks" src="{WSP_ASSETS_PATH}images/icon04.png" />
+        <div class="clear"></div>
+    </div>
+    <div class="party-time">{$val['startTime']}&nbsp;至&nbsp;{$val['endTime']}&nbsp;&nbsp;&nbsp;&nbsp;浏览：{$val['pvNum']}</div>
+</div>
+{/foreach}
+</body>
+</html>
